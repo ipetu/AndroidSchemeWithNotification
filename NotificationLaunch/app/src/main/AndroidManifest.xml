@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.liangzili.notificationlaunch">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme">
+        <activity android:name=".SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask"></activity>
+        <activity android:name=".DetailActivity"></activity>
+        <activity android:name=".BActivity">
+            <!-- 要想在别的App上能成功调起App，必须添加intent过滤器 -->
+            <intent-filter>
+                <!-- 协议部分，随便设置 -->
+                <data
+                    android:host="test.uri.activity"
+                    android:scheme="dnx" />
+                <!-- 下面这几行也必须得设置 -->
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.dnx.schemeurl.activity" />
+            </intent-filter>
+
+        </activity>
+
+        <service
+            android:name=".PushService"
+            android:process=":push" />
+
+        <receiver
+            android:name=".NotificationReceiver"
+            android:process=":push" />
+        <receiver
+            android:name=".ShowNotificationReceiver"
+            android:process=":push" />
+    </application>
+
+</manifest>
